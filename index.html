@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NimbusBot - Soluções em Nuvem e Automação</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fa;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        header {
+            background: linear-gradient(90deg, #1e3a8a, #2a5298);
+            color: white;
+            text-align: center;
+            padding: 1.5rem 2rem;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border-bottom: 3px solid #facc15;
+        }
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.5rem 0;
+            transition: transform 0.5s ease, filter 0.5s ease;
+        }
+        .logo-container:hover {
+            transform: scale(1.05);
+            filter: brightness(1.2);
+        }
+        .logo {
+            width: 60px;
+            height: 60px;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        nav {
+            margin-top: 1rem;
+            padding: 0.5rem 0;
+        }
+        nav a {
+            color: white;
+            margin: 0 20px;
+            text-decoration: none;
+            font-weight: 600;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #facc15;
+            left: 50%;
+            bottom: -5px;
+            transition: width 0.3s ease, left 0.3s ease;
+        }
+        nav a:hover::after {
+            width: 100%;
+            left: 0;
+        }
+        nav a:hover {
+            color: #facc15;
+        }
+        .hero {
+            text-align: center;
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #2a5298, #4c6ef5);
+            color: white;
+            position: relative;
+            overflow: hidden;
+            min-height: 400px;
+        }
+        .cloud {
+            position: absolute;
+            z-index: 1;
+            animation: float 25s ease-in-out infinite, fade 5s ease-in-out infinite;
+        }
+        .cloud:nth-child(1) {
+            top: 15%;
+            left: -250px;
+            width: 200px;
+            animation-duration: 30s, 6s;
+        }
+        .cloud:nth-child(2) {
+            top: 40%;
+            left: -300px;
+            width: 250px;
+            animation-duration: 35s, 7s;
+        }
+        .cloud:nth-child(3) {
+            top: 60%;
+            left: -200px;
+            width: 180px;
+            animation-duration: 40s, 8s;
+        }
+        .cloud:nth-child(4) {
+            top: 80%;
+            left: -280px;
+            width: 220px;
+            animation-duration: 32s, 9s;
+        }
+        @keyframes float {
+            0% { transform: translateX(-300px); }
+            50% { transform: translateX(1000px); }
+            100% { transform: translateX(2000px); }
+        }
+        @keyframes fade {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+        .hero h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 2;
+            transition: transform 0.5s ease;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+            transition: opacity 0.5s ease;
+        }
+        .hero:hover h2 {
+            transform: scale(1.02);
+        }
+        .hero:hover p {
+            opacity: 1;
+        }
+        .cta-button {
+            background: linear-gradient(45deg, #facc15, #e0b800);
+            color: #1e3a8a;
+            padding: 1.2rem 2.5rem;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 10px;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(250, 204, 21, 0.4);
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 2;
+        }
+        .cta-button:hover {
+            background: linear-gradient(45deg, #e0b800, #d4a700);
+            box-shadow: 0 6px 20px rgba(250, 204, 21, 0.6);
+            transform: translateY(-3px);
+        }
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"%3E%3Cpath fill="%23ffffff33" fill-opacity="0.3" d="M0,64L48,80C96,96,192,128,288,122.7C384,117,480,75,576,85.3C672,96,768,160,864,176C960,192,1056,160,1152,149.3C1248,139,1344,149,1392,154.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"%3E%3C/path%3E%3C/svg%3E');
+            background-size: cover;
+            opacity: 0.2;
+            z-index: -1;
+            border-radius: 10px;
+        }
+        .services, .history, .clients, .policy, .contact-form {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .services h3, .history h3, .clients h3, .policy h3, .contact-form h3 {
+            color: #1e3a8a;
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            transition: color 0.5s ease;
+        }
+        .services h3:hover, .history h3:hover, .clients h3:hover, .policy h3:hover, .contact-form h3:hover {
+            color: #2a5298;
+        }
+        .services h3::after, .history h3::after, .clients h3::after, .policy h3::after, .contact-form h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: #1e3a8a;
+            animation: underline 1.5s infinite alternate;
+            transition: background 0.5s ease;
+        }
+        @keyframes underline {
+            from { width: 50px; }
+            to { width: 100px; }
+        }
+        .service-item {
+            background: linear-gradient(135deg, white, #f9fbfd);
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .service-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .service-item .icon {
+            width: 50px;
+            height: 50px;
+            flex-shrink: 0;
+            transition: transform 0.4s ease;
+        }
+        .service-item:hover .icon {
+            transform: rotate(10deg);
+        }
+        .service-item h4 {
+            color: #2a5298;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            transition: color 0.4s ease;
+        }
+        .service-item p {
+            color: #555;
+            font-size: 1rem;
+            margin: 0;
+            transition: color 0.4s ease;
+        }
+        .service-item:hover h4, .service-item:hover p {
+            color: #1e3a8a;
+        }
+        .history p {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            color: #555;
+            transition: opacity 0.5s ease;
+        }
+        .history:hover p {
+            opacity: 0.9;
+        }
+        .clients {
+            background: #fff;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: box-shadow 0.4s ease;
+        }
+        .clients:hover {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .carousel {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            height: 100px;
+        }
+        .carousel-track {
+            display: flex;
+            animation: scroll 15s ease-in-out infinite;
+        }
+        .carousel-track img {
+            width: 150px;
+            height: 80px;
+            margin: 0 20px;
+            object-fit: contain;
+            opacity: 0.8;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        .carousel-track img:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            45% { transform: translateX(-45%); }
+            55% { transform: translateX(-55%); }
+            100% { transform: translateX(-100%); }
+        }
+        .policy-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1rem;
+            color: #555;
+        }
+        .policy-content h4 {
+            color: #2a5298;
+            font-size: 1.3rem;
+            margin: 1.5rem 0 0.5rem;
+            transition: color 0.4s ease;
+        }
+        .policy-content p {
+            transition: opacity 0.5s ease;
+        }
+        .policy-content:hover h4 {
+            color: #1e3a8a;
+        }
+        .policy-content:hover p {
+            opacity: 0.9;
+        }
+        .contact-form form {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 0 auto;
+            transition: box-shadow 0.4s ease;
+        }
+        .contact-form form:hover {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .contact-form label {
+            display: block;
+            margin: 0.5rem 0 0.2rem;
+            color: #2a5298;
+            font-weight: 600;
+            transition: color 0.4s ease;
+        }
+        .contact-form input, .contact-form select, .contact-form textarea {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+        }
+        .contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus {
+            border-color: #facc15;
+            box-shadow: 0 0 8px rgba(250, 204, 21, 0.4);
+            transform: translateY(-2px);
+            outline: none;
+        }
+        .contact-form select {
+            appearance: none;
+            background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="%23333"%3E%3Cpath d="M7 10l5 5 5-5z"/%3E%3C/svg%3E') no-repeat right 0.75rem center/12px 12px;
+            padding-right: 2rem;
+            transition: background 0.3s ease;
+        }
+        .contact-form select:focus {
+            background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="%23facc15"%3E%3Cpath d="M7 10l5 5 5-5z"/%3E%3C/svg%3E') no-repeat right 0.75rem center/12px 12px;
+        }
+        .contact-form button {
+            background: linear-gradient(45deg, #facc15, #e0b800);
+            color: #1e3a8a;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            width: 100%;
+        }
+        .contact-form button:hover {
+            background: linear-gradient(45deg, #e0b800, #d4a700);
+            box-shadow: 0 4px 15px rgba(250, 204, 21, 0.6);
+            transform: translateY(-3px);
+        }
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            background: linear-gradient(90deg, #1e3a8a, #2a5298);
+            color: white;
+            position: relative;
+            z-index: 10;
+            transition: background 0.5s ease;
+        }
+        footer:hover {
+            background: linear-gradient(90deg, #2a5298, #1e3a8a);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img class="logo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='%23facc15'%3E%3Cpath d='M50 20c-16.6 0-30 13.4-30 30s13.4 30 30 30 30-13.4 30-30-13.4-30-30-30zm0 50c-11 0-20-9-20-20s9-20 20-20 20 9 20 20-9 20-20 20zm-10-10h20v10H40v-10zm0-20h20v10H40v-10z'/%3E%3C/svg%3E">
+            <h1>NimbusBot</h1>
+        </div>
+        <nav>
+            <a href="#services">Serviços</a>
+            <a href="#history">História</a>
+            <a href="#clients">Clientes</a>
+            <a href="#policy">Política</a>
+            <a href="#contact-form">Contato</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 80'%3E%3Cpath fill='%23ffffff' d='M0 60 Q 25 20 50 50 T 100 40 Q 125 20 150 50 V80 H0 Z M30 60 Q 50 30 70 50 T 110 40 Q 130 20 150 50 V80 H30 Z'/%3E%3C/svg%3E" class="cloud">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 90'%3E%3Cpath fill='%23ffffff' d='M0 70 Q 30 20 60 60 T 120 50 Q 150 20 180 60 V90 H0 Z M40 70 Q 60 30 80 60 T 140 50 Q 160 20 180 60 V90 H40 Z'/%3E%3C/svg%3E" class="cloud">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 85'%3E%3Cpath fill='%23ffffff' d='M0 65 Q 25 15 50 55 T 110 45 Q 135 15 160 55 V85 H0 Z M35 65 Q 55 25 75 55 T 125 45 Q 145 15 160 55 V85 H35 Z'/%3E%3C/svg%3E" class="cloud">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 170 90'%3E%3Cpath fill='%23ffffff' d='M0 70 Q 30 20 60 60 T 120 50 Q 150 20 170 60 V90 H0 Z M40 70 Q 60 30 80 60 T 140 50 Q 160 20 170 60 V90 H40 Z'/%3E%3C/svg%3E" class="cloud">
+        <h2>Transforme seu negócio com a força da nuvem e automação</h2>
+        <p>Oferecemos chatbots inteligentes, RPA avançado e soluções em nuvem para otimizar seus processos e atrair mais clientes.</p>
+        <a href="#contact-form" class="cta-button">Solicite uma Demonstração</a>
+    </section>
+
+    <section class="services" id="services">
+        <h3>Nossos Serviços</h3>
+        <div class="service-item">
+            <img class="icon" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232a5298'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15h-2v-2h2v2zm0-4h-2V7h2v6zm4 4h-2v-2h2v2zm0-4h-2V7h2v6z'/%3E%3C/svg%3E">
+            <div>
+                <h4>Chatbots Personalizados</h4>
+                <p>Crie assistentes virtuais que conversam como humanos, 24/7, para engajar seus clientes e resolver dúvidas rapidamente.</p>
+            </div>
+        </div>
+        <div class="service-item">
+            <img class="icon" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232a5298'%3E%3Cpath d='M12 2a10 10 0 00-8.7 14.9L2 22l5.1-1.3A10 10 0 1012 2zm0 18a8 8 0 01-4.3-1.2l-.7.2-3-1 1-3 .2-.7A8 8 0 1112 20zm2-6h-4v-2h4v2zm0-4h-4V6h4v2z'/%3E%3C/svg%3E">
+            <div>
+                <h4>RPA (Automação Robótica de Processos)</h4>
+                <p>Automatize tarefas repetitivas com robôs inteligentes, aumentando a eficiência e reduzindo custos.</p>
+            </div>
+        </div>
+        <div class="service-item">
+            <img class="icon" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232a5298'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15h-2v-2h2v2zm0-4h-2V7h2v6zm4 4h-2v-2h2v2zm0-4h-2V7h2v6z'/%3E%3C/svg%3E">
+            <div>
+                <h4>Soluções em Nuvem</h4>
+                <p>Hospedagem segura e escalável para seus dados e aplicações, com foco em desempenho e acessibilidade.</p>
+            </div>
+        </div>
+        <div class="service-item">
+            <img class="icon" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232a5298'%3E%3Cpath d='M12 2a10 10 0 00-8.7 14.9L2 22l5.1-1.3A10 10 0 1012 2zm0 18a8 8 0 01-4.3-1.2l-.7.2-3-1 1-3 .2-.7A8 8 0 1112 20zm2-6h-4v-2h4v2zm0-4h-4V6h4v2z'/%3E%3C/svg%3E">
+            <div>
+                <h4>Outros Serviços</h4>
+                <p>Desenvolvimento de sites, integração de sistemas e mais, sob medida para sua empresa.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="history" id="history">
+        <h3>Nossa História</h3>
+        <p>A NimbusBot nasceu em 2020 com uma missão: levar a automação e a tecnologia em nuvem para empresas de todos os tamanhos. Começamos como uma pequena equipe apaixonada por chatbots e RPA, e hoje somos uma referência em soluções inteligentes que transformam negócios. Nosso foco é na inovação, na personalização e na confiança, garantindo que nossos clientes alcancem seus objetivos com eficiência e segurança. Junte-se a nós e faça parte dessa história!</p>
+    </section>
+
+    <section class="clients" id="clients">
+        <h3>Nossos Clientes</h3>
+        <div class="carousel">
+            <div class="carousel-track">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 50'%3E%3Ctext x='10' y='35' font-size='20' fill='%231e3a8a'%3EPitch English%3C/text%3E%3C/svg%3E">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 50'%3E%3Ctext x='10' y='35' font-size='20' fill='%231e3a8a'%3EPitch English%3C/text%3E%3C/svg%3E">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 50'%3E%3Ctext x='10' y='35' font-size='20' fill='%231e3a8a'%3EPitch English%3C/text%3E%3C/svg%3E">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 50'%3E%3Ctext x='10' y='35' font-size='20' fill='%231e3a8a'%3EPitch English%3C/text%3E%3C/svg%3E">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 50'%3E%3Ctext x='10' y='35' font-size='20' fill='%231e3a8a'%3EPitch English%3C/text%3E%3C/svg%3E">
+            </div>
+        </div>
+    </section>
+
+    <section class="policy" id="policy">
+        <h3>Política da NimbusBot</h3>
+        <div class="policy-content">
+            <h4>1. Termos Gerais</h4>
+            <p>A NimbusBot é uma empresa de tecnologia que oferece soluções em nuvem, chatbots, automação robótica de processos (RPA) e outros serviços digitais. Ao utilizar nossos serviços, você concorda com os termos aqui apresentados, que regem o uso de nossas plataformas e soluções.</p>
+
+            <h4>2. Uso dos Serviços</h4>
+            <p>Nossos serviços são destinados a empresas e indivíduos que buscam soluções de automação e tecnologia em nuvem. Você se compromete a usar os serviços de forma lícita, respeitando todas as leis aplicáveis, incluindo a Lei Geral de Proteção de Dados (LGPD) no Brasil. Não é permitido o uso de nossos serviços para atividades ilegais, fraudulentas ou que violem os direitos de terceiros.</p>
+
+            <h4>3. Propriedade Intelectual</h4>
+            <p>Todos os conteúdos, ferramentas e tecnologias desenvolvidas pela NimbusBot, incluindo chatbots, sistemas de RPA e plataformas em nuvem, são de nossa propriedade intelectual. O uso de nossos serviços não transfere nenhum direito de propriedade intelectual ao cliente, sendo permitido apenas o uso conforme os termos contratados.</p>
+
+            <h4>4. Privacidade e Proteção de Dados</h4>
+            <p>Estamos comprometidos com a proteção dos dados de nossos clientes. Seguimos rigorosamente a LGPD, garantindo que os dados coletados sejam usados apenas para os fins acordados, com total transparência. Implementamos medidas de segurança avançadas para proteger suas informações contra acesso não autorizado, perda ou vazamento.</p>
+
+            <h4>5. Limitação de Responsabilidade</h4>
+            <p>A NimbusBot não se responsabiliza por danos diretos ou indiretos decorrentes do uso de nossos serviços, incluindo interrupções de sistema ou falhas técnicas fora de nosso controle. Nosso suporte técnico está disponível para minimizar quaisquer impactos, mas não garantimos operação ininterrupta.</p>
+
+            <h4>6. Alterações nos Termos</h4>
+            <p>Podemos atualizar esta política periodicamente para refletir mudanças em nossos serviços ou na legislação aplicável. As alterações serão comunicadas por e-mail ou em nosso site, e o uso contínuo dos serviços implica na aceitação dos novos termos.</p>
+
+            <h4>7. Contato</h4>
+            <p>Se você tiver dúvidas sobre esta política ou sobre o uso de nossos serviços, entre em contato conosco pelos e-mails contato@nimbusbot.com ou suporte@nimbusbot.com. Estamos à disposição para esclarecer suas dúvidas e garantir a melhor experiência possível.</p>
+        </div>
+    </section>
+
+    <section class="contact-form" id="contact-form">
+        <h3>Entre em Contato</h3>
+        <form>
+            <label for="name">Nome</label>
+            <input type="text" id="name" name="name" placeholder="Seu nome" required>
+
+            <label for="company">Empresa</label>
+            <input type="text" id="company" name="company" placeholder="Nome da sua empresa" required>
+
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" required>
+
+            <label for="phone">Telefone</label>
+            <input type="tel" id="phone" name="phone" placeholder="(XX) XXXXX-XXXX" required>
+
+            <label for="product">Produto de Interesse</label>
+            <select id="product" name="product" required>
+                <option value="">Selecione um produto</option>
+                <option value="chatbots">Chatbots Personalizados</option>
+                <option value="rpa">RPA (Automação Robótica de Processos)</option>
+                <option value="cloud">Soluções em Nuvem</option>
+                <option value="other">Outros Serviços</option>
+            </select>
+
+            <label for="message">Mensagem (Opcional)</label>
+            <textarea id="message" name="message" placeholder="Deixe sua mensagem ou detalhes adicionais"></textarea>
+
+            <button type="button" onclick="alert('Mensagem enviada! Entraremos em contato em breve.')">Enviar Solicitação</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>© 2025 NimbusBot. Todos os direitos reservados.</p>
+        <p>Entre em contato: contato@nimbusbot.com | suporte@nimbusbot.com | (11) 1234-5678</p>
+    </footer>
+
+    <script>
+        // Adiciona um efeito de rolagem suave para os links de navegação
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
